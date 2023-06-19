@@ -1,3 +1,4 @@
+import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ,
+      home: SplashScreen(),
     );
   }
 }
