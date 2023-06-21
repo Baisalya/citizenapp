@@ -1,7 +1,13 @@
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+  ));
   runApp(const MyApp());
 }
 
@@ -12,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Citizen ',
       theme: ThemeData(
         // This is the theme of your application.
         //
