@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 
 class AppStyles {
+  static const TextStyle LoginPrimaryText = TextStyle(
+    fontSize: 20,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle LoginSecondaryText = TextStyle(
+    fontSize: 16,
+
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  );
   static const TextStyle primaryText = TextStyle(
     fontSize: 16,
+    fontFamily: 'OpenSans',
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
 
   static const TextStyle secondaryText = TextStyle(
-    fontSize: 14,
+    fontSize: 16,
+    fontFamily: 'OpenSans',
     color: Colors.grey,
   );
 
