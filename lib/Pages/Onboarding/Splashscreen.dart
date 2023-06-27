@@ -1,6 +1,7 @@
 import 'package:citizenapp/Pages/Onboarding/OnboardingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,10 +13,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacement(
+    /*  Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen()),
-      );
+      );*/
+      Get.offNamed('/onBoarding');
     });
   }
 

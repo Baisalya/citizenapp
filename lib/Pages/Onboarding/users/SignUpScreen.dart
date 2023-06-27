@@ -1,21 +1,19 @@
+import 'package:citizenapp/Pages/Onboarding/users/LoginScreen.dart';
 import 'package:citizenapp/Utils/app_colors.dart';
+import 'package:citizenapp/Utils/app_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../../../Utils/app_styles.dart';
-import 'SignUpScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool _isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   const Center(
                     child: Text(
-                      "Sign In",
+                      "Sign Up",
                       style: AppStyles.LoginPrimaryText,
                     ),
                   ),
@@ -59,6 +57,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      const Text(
+                        "Name",
+                        style: AppStyles.LoginSecondaryText,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            const BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 2),
+                              blurRadius: 4.0,
+                            ),
+                          ],
+                        ),
+                        height: 60.0,
+                        child: const TextField(
+                          style: AppStyles.secondaryText,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.black87,
+                            ),
+                            hintText: 'Enter your Name',
+                            hintStyle: TextStyle(
+                              color: Colors.black38,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30.0),
                       const Text(
                         "Email",
                         style: AppStyles.LoginSecondaryText,
@@ -79,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         height: 60.0,
                         child: const TextField(
-                          obscureText: true,
                           style: AppStyles.secondaryText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -88,7 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               Icons.email,
                               color: Colors.black87,
                             ),
-
                             hintText: 'Enter your Email',
                             hintStyle: TextStyle(
                               color: Colors.black38,
@@ -97,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-
                       const SizedBox(height: 30.0),
                       const Text(
                         "Password",
@@ -120,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 60.0,
                         child: TextField(
                           obscureText: !_isPasswordVisible, // Toggle visibility based on the state
-                          style:AppStyles.secondaryText,
+                          style: AppStyles.secondaryText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -147,21 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-
                       const SizedBox(height: 30.0),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         width: double.infinity,
@@ -176,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           child: const Text(
-                            'SIGN IN',
+                            'SIGN UP',
                             style: TextStyle(
                               color: Color(0xFF527DAA),
                               letterSpacing: 1.5,
@@ -198,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      const Center(
+                       Center(
                         child: Text(
                           'Sign up with',
                           style: TextStyle(
@@ -213,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: <Widget>[
                           GestureDetector(
                             onTap: () {
-                              // Handle Facebook sign in
+                              // Handle Facebook sign up
                             },
                             child: Container(
                               height: 60.0,
@@ -239,7 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(width: 60.0),
                           GestureDetector(
                             onTap: () {
-                              // Handle Google sign in
+                              // Handle Google sign up
                             },
                             child: Container(
                               height: 60.0,
@@ -267,14 +285,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 40.0),
                       GestureDetector(
                         onTap: () {
-                          // Handle sign up
+                          Get.offNamed('/login');
                         },
                         child: Center(
                           child: RichText(
                             text:  TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "Don't have an account? ",
+                                  text: "Already have an account? ",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -282,18 +300,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: "Sign up",
+                                  text: "Sign in",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap=(){
-                                    Get.offNamed('/signup');
-                                   /* Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SignUpScreen()));*/
-                                    }
                                 ),
                               ],
                             ),
@@ -311,4 +323,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
