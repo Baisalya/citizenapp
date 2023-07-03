@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Utils/app_styles.dart';
 import 'SignUpScreen.dart';
+import 'authentication_view_model/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,11 +18,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordVisible = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          //background gradient
           Container(
             height: double.infinity,
             width: double.infinity,
@@ -49,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  //Signin text
                   const Center(
                     child: Text(
                       "Sign In",
@@ -78,10 +84,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         height: 60.0,
-                        child: const TextField(
+                        child:  TextField(
                           obscureText: true,
+                          controller: emailController,
                           style: AppStyles.secondaryText,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 15.0),
                             prefixIcon: Icon(
@@ -119,7 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         height: 60.0,
                         child: TextField(
-                          obscureText: !_isPasswordVisible, // Toggle visibility based on the state
+                          obscureText: !_isPasswordVisible,
+                          // Toggle visibility based on the state
+                          controller: passwordController,
                           style:AppStyles.secondaryText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -166,7 +175,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            final email = emailController.text;
+                            final password = passwordController.text;
+                            final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+                            authViewModel.loginUser(email, password).then((success){
+                              if (success) {
+                                // Login successful, navigate to the next screen
+
+                              } else {
+                                // Show error message
+                              }
+                            });
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             elevation: 5.0,
