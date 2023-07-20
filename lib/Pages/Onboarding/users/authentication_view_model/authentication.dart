@@ -9,8 +9,8 @@ import '../model/User_model.dart';
 class AuthViewModel extends ChangeNotifier {
   //Login User
   Future<bool> loginUser(String email, String password) async {
-    final Uri apiUrl = Uri.parse('$apiBaseUrl/api/auth/login');
-
+   // final Uri apiUrl = Uri.parse('$apiBaseUrl/api/auth/login');
+    final Uri apiUrl = Uri.parse('http://localhost:8800/api/auth/login');
     try {
       final response = await http.post(
         apiUrl,
@@ -35,7 +35,10 @@ class AuthViewModel extends ChangeNotifier {
         throw Exception(errorMessage); // Throw an exception to be caught and handled
       } else {
         // Handle other login errors
-        return false;
+       // return false;
+        final responseBody = json.decode(response.body);
+        final errorMessage = responseBody['message'];
+        throw Exception(errorMessage);
       }
     } catch (e) {
       // Handle any exceptions thrown during the API call

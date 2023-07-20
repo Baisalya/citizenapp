@@ -13,18 +13,24 @@ class AppTheme {
     primaryColor: AppColors.primaryColor,
     primaryColorDark: Color(0xFF303F9F),
     primaryColorLight: Color(0xFFC5CAE9),
-    accentColor: AppColors.accentColor,
+    hintColor: AppColors.accentColor,
     backgroundColor: AppColors.backgroundColor,
     scaffoldBackgroundColor: AppColors.backgroundColor,
     appBarTheme: AppBarTheme(
       color: AppColors.primaryColor,
-      textTheme: TextTheme(
+      toolbarTextStyle: TextTheme(
         headline6: TextStyle(
           color: AppColors.textColor,
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
-      ),
+      ).bodyText2, titleTextStyle: TextTheme(
+        headline6: TextStyle(
+          color: AppColors.textColor,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ).headline6,
     ),
     textTheme: TextTheme(
       bodyText1: TextStyle(

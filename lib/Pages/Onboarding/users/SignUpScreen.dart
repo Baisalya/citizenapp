@@ -1,19 +1,107 @@
 import 'package:citizenapp/Pages/Onboarding/users/LoginScreen.dart';
+import 'package:citizenapp/Pages/Onboarding/users/authentication_view_model/authentication.dart';
 import 'package:citizenapp/Utils/app_colors.dart';
 import 'package:citizenapp/Utils/app_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'authentication_view_model/RegisterViewModel.dart';
+import 'model/User_model.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<RegisterViewModel>(
+      create: (_) => RegisterViewModel(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Register'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(labelText: 'Username'),
+              ),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              SizedBox(height: 16),
+              Consumer<RegisterViewModel>(
+                builder: (context, registerViewModel, child) {
+                  return ElevatedButton(
+                    onPressed: registerViewModel.isLoading
+                        ? null
+                        : () {
+                      final username = _usernameController.text.trim();
+                      final email = _emailController.text.trim();
+                      final password = _passwordController.text;
+
+                      // Call the registration function
+                      Provider.of<RegisterViewModel>(context, listen: false)
+                          .registerUser(username, email, password);
+                    },
+                    child: Text('Register'),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+/*class SignUpScreen extends StatefulWidget {
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _isPasswordVisible = false;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  AuthViewModel authViewModel=AuthViewModel();
 
+  void _registerUser() async {
+    final user = User(
+      username: _usernameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      phoneNo: '', profilePic: '',
+    );
+
+    try {
+      bool isRegistered = await authViewModel.registerUser(user);
+      if (isRegistered) {
+        // Registration successful, navigate to another page or show a success message.
+      } else {
+        // Handle registration failure, show an error message.
+      }
+    } catch (e) {
+      // Handle any exceptions thrown during registration, show an error message.
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +164,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                         height: 60.0,
-                        child: const TextField(
+                        child:  TextField(
                           style: AppStyles.secondaryText,
+                          controller: _usernameController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 15.0),
@@ -113,7 +202,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                         height: 60.0,
-                        child: const TextField(
+                        child:  TextField(
+                          controller: _emailController,
                           style: AppStyles.secondaryText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -152,6 +242,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 60.0,
                         child: TextField(
                           obscureText: !_isPasswordVisible, // Toggle visibility based on the state
+                          controller: _passwordController,
                           style: AppStyles.secondaryText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -184,7 +275,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 25.0),
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: _registerUser,
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             elevation: 5.0,
@@ -322,4 +413,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-}
+}*/

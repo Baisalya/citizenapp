@@ -13,4 +13,11 @@ class User {
     required this.profilePic,
     required this.password,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'email': email,
+      'password': password,
+    };
+  }
 }
