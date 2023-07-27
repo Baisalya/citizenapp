@@ -1,9 +1,11 @@
+import 'package:citizenapp/Pages/Home/HomeScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/OnboardingScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
-import 'package:citizenapp/Pages/Onboarding/users/LoginScreen.dart';
-import 'package:citizenapp/Pages/Onboarding/users/SignUpScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../Pages/users/LoginScreen.dart';
+import '../Pages/users/SignUpScreen.dart';
 
 class AppRoutes {
   static final List<GetPage> routes = [
@@ -28,5 +30,7 @@ class AppRoutes {
         page: () =>SignUpScreen(),
         transition: Transition.upToDown
     ),
+    GetPage(name: '/home',
+        page: ()=>HomeScreen())
   ];
 }

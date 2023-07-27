@@ -29,18 +29,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Screen"),
+    return SafeArea(
+      child: Scaffold(
+      /*  appBar: AppBar(
+          title: Text("Home Screen"),
+        ),*/
+        body: _screens[_currentIndex],
+        bottomNavigationBar:buildBottomNavigationBar()
       ),
-      body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+    );
+  }
+  Widget buildBottomNavigationBar() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white, // Customize the background color of the navigation bar
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3), // Add a subtle shadow to the navigation bar
+            blurRadius: 8,
+            offset: Offset(0, -3),
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
+        selectedItemColor: Theme.of(context).primaryColor, // Customize the selected tab color
+        unselectedItemColor: Colors.grey, // Customize the unselected tab color
+        selectedFontSize: 14, // Customize the font size of the selected label
+        unselectedFontSize: 12, // Customize the font size of the unselected label
+        type: BottomNavigationBarType.fixed, // Ensure that all items are visible even with labels
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
