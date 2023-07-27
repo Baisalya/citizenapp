@@ -17,9 +17,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
 
-  final List<Widget> _screens = [
+  final List<Widget> tabs = [
     HomeTab(),
     PoliceTab(),
     HospitalTab(),
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       /*  appBar: AppBar(
           title: Text("Home Screen"),
         ),*/
-        body: _screens[_currentIndex],
+        body: tabs[currentIndex],
         bottomNavigationBar:buildBottomNavigationBar()
       ),
     );
@@ -52,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       child: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         onTap: (index) {
           setState(() {
-            _currentIndex = index;
+            currentIndex = index;
           });
         },
         selectedItemColor: Theme.of(context).primaryColor, // Customize the selected tab color

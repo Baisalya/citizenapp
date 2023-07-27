@@ -331,7 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {
                         // Handle sign up
-                        Get.offNamed('/signup');
+                        Get.offNamed('/home');
                         /* Navigator.push(context,
                                     MaterialPageRoute(builder: (context) => SignUpScreen()));*/
                       },

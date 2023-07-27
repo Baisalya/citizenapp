@@ -1,7 +1,8 @@
-import 'package:citizenapp/Pages/Onboarding/users/LoginScreen.dart';
 import 'package:citizenapp/model/onboarding_page_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+
+import '../users/LoginScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override

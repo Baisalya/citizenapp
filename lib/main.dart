@@ -1,12 +1,12 @@
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
-import 'package:citizenapp/Pages/Onboarding/users/authentication_view_model/authentication.dart';
 import 'package:citizenapp/Routes/AppRoutes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'Pages/Onboarding/users/authentication_view_model/RegisterViewModel.dart';
+import 'Pages/users/authentication_view_model/RegisterViewModel.dart';
+import 'Pages/users/authentication_view_model/authentication.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
