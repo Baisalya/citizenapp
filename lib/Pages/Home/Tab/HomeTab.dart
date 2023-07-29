@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:get/get.dart';
+
 class HomeTab extends StatelessWidget {
   final PageController _pageController = PageController();
   Timer? _scrollTimer;
@@ -85,7 +87,7 @@ class HomeTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'John Doe',
+                      'Baisalya Roul',
                       style: TextStyle(
                         fontSize: buttonTextSize * 1.2,
                         fontWeight: FontWeight.bold,
@@ -94,7 +96,7 @@ class HomeTab extends StatelessWidget {
                     ),
                     SizedBox(height: spacing),
                     Text(
-                      'New York, USA',
+                      'Aul,Kendrapara',
                       style: TextStyle(
                         fontSize: buttonTextSize,
                         color: Colors.white70,
@@ -106,6 +108,7 @@ class HomeTab extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Handle Edit Profile button tap
+                  Get.offNamed('/editProfile');
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
@@ -187,12 +190,12 @@ class HomeTab extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Contact 1'),
-            subtitle: Text('123-456-7890'),
+            subtitle: Text('8249166181'),
           ),
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Contact 2'),
-            subtitle: Text('987-654-3210'),
+            subtitle: Text('8249166181'),
           ),
         ],
       ),

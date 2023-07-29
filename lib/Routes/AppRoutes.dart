@@ -1,6 +1,7 @@
 import 'package:citizenapp/Pages/Home/HomeScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/OnboardingScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
+import 'package:citizenapp/Pages/users/EditProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,6 +32,9 @@ class AppRoutes {
         transition: Transition.upToDown
     ),
     GetPage(name: '/home',
-        page: ()=>HomeScreen())
+        page: ()=>HomeScreen()),
+
+    GetPage(name: '/editProfile',
+        page: ()=>EditProfileScreen())
   ];
 }
