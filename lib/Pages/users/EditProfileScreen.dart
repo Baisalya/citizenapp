@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -6,6 +9,31 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  File? _image;
+
+  // Function to open the gallery and select an image
+  Future<void> _pickImageFromGallery() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  // Function to open the camera and take a photo
+  Future<void> _pickImageFromCamera() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
   String selectedGovtIDType = 'Aadhar Card';
   List<String> govtIDTypes = [
     'Aadhar Card',
@@ -45,32 +73,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
-
   Widget buildProfilePicture() {
     return GestureDetector(
-      onTap: () {
-        // Add logic to update profile picture
-      },
+      onTap: _pickImageFromGallery,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          CircleAvatar(
-            radius: 72,
-            backgroundImage: AssetImage('assets/profile_placeholder.png'),
+          Container(
+            width: 144, // Set a fixed width for the container
+            height: 144, // Set a fixed height for the container
+            child: ClipOval(
+              child: _image != null
+                  ? Image.file(
+                _image!,
+                fit: BoxFit.cover,
+              )
+                  : Image.asset(
+                'assets/default_profile_picture.png',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,
             right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  // Add icon or camera icon here
-                },
-                icon: Icon(
+            child: GestureDetector(
+              onTap: _pickImageFromCamera,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.blue,
+                ),
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
                   Icons.camera_alt,
                   color: Colors.white,
                 ),
@@ -81,6 +116,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
+
+
+
+
+
+
+
 
   Widget buildLocationField() {
     return TextFormField(
