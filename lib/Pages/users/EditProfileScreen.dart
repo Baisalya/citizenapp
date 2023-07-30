@@ -10,8 +10,9 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   File? _image;
+  String fullName = '';
 
-  // Function to open the gallery and select an image
+/*  // Function to open the gallery and select an image
   Future<void> _pickImageFromGallery() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -33,7 +34,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         _image = File(pickedFile.path);
       });
     }
+  }*/
+
+  Future<void> _pickImageFromCameraOrGallery(bool isCamera) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: isCamera ? ImageSource.camera : ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
+
   String selectedGovtIDType = 'Aadhar Card';
   List<String> govtIDTypes = [
     'Aadhar Card',
@@ -41,7 +56,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     'Passport',
     'Voter ID',
   ];
-
+  String selectedSex = 'Male'; // Default value for the selected sex/gender
+  List<String> sexOptions = [
+    'Male',
+    'Female',
+    'Other',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +76,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             children: [
               buildProfilePicture(),
               SizedBox(height: 32),
+              buildFullNameField(),
+              SizedBox(height: 16),
+              buildSexDropdown(),
+              SizedBox(height: 16),
               buildLocationField(),
               SizedBox(height: 16),
               buildEmailField(),
@@ -73,10 +97,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
+  //
   Widget buildProfilePicture() {
-    return GestureDetector(
-      onTap: _pickImageFromGallery,
-      child: Stack(
+    return Stack(
         alignment: Alignment.center,
         children: [
           Container(
@@ -98,7 +121,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             bottom: 0,
             right: 0,
             child: GestureDetector(
-              onTap: _pickImageFromCamera,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Wrap(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.camera_alt),
+                          title: Text('Take a Photo'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImageFromCameraOrGallery(true); // Open camera
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.image),
+                          title: Text('Choose from Gallery'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImageFromCameraOrGallery(
+                                false); // Open gallery
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -113,17 +163,47 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
           ),
         ],
+    );
+  }
+  //
+  Widget buildFullNameField() {
+    return TextFormField(
+      //controller: _fullNameController, // Link the controller to the TextFormField
+      onChanged: (value) {
+        setState(() {
+          fullName = value;
+        });
+      },
+      decoration: InputDecoration(
+        labelText: 'Full Name',
+        border: OutlineInputBorder(),
+        prefixIcon: Icon(Icons.person),
       ),
     );
   }
-
-
-
-
-
-
-
-
+  //
+  Widget buildSexDropdown() {
+    return DropdownButtonFormField<String>(
+      value: selectedSex,
+      onChanged: (newValue) {
+        setState(() {
+          selectedSex = newValue!;
+        });
+      },
+      items: sexOptions.map((sex) {
+        return DropdownMenuItem<String>(
+          value: sex,
+          child: Text(sex),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+        labelText: 'Sex/Gender',
+        border: OutlineInputBorder(),
+        prefixIcon: Icon(Icons.person),
+      ),
+    );
+  }
+  //
   Widget buildLocationField() {
     return TextFormField(
       decoration: InputDecoration(
