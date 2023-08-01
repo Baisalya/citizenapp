@@ -108,7 +108,7 @@ class HomeTab extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Handle Edit Profile button tap
-                  Get.offNamed('/editProfile');
+                  Get.toNamed('/editProfile');
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,

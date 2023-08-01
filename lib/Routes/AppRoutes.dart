@@ -1,7 +1,9 @@
 import 'package:citizenapp/Pages/Home/HomeScreen.dart';
+import 'package:citizenapp/Pages/Home/SettingTab/ChangePasswordScreen.dart';
+import 'package:citizenapp/Pages/Home/Tab/SettingTab.dart';
 import 'package:citizenapp/Pages/Onboarding/OnboardingScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
-import 'package:citizenapp/Pages/users/EditProfileScreen.dart';
+import 'package:citizenapp/Pages/Home/SettingTab/EditProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,10 +33,17 @@ class AppRoutes {
         page: () =>SignUpScreen(),
         transition: Transition.upToDown
     ),
+    //Tabs
     GetPage(name: '/home',
         page: ()=>HomeScreen()),
 
+    GetPage(name: '/setting',
+        page:()=> SettingsTab()),
+
+   //setting contents
     GetPage(name: '/editProfile',
-        page: ()=>EditProfileScreen())
+        page: ()=>EditProfileScreen()),
+    GetPage(name:'/changePassword' ,
+        page: ()=>ChangePasswordScreen())
   ];
 }
