@@ -42,6 +42,12 @@ dependencies:
   fluttertoast:
   permission_handler: ^10.1.0
   image_picker:
+  google_maps_flutter: ^2.0.0
+  location: ^4.3.0
+  flutter_map: ^5.0.0
+  geolocator:
+  geocoding:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

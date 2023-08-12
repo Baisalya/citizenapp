@@ -122,6 +122,7 @@ class SettingsTab extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: () {
         // Implement logout functionality here
+        Get.offNamed('/login');
       },
       icon: Icon(Icons.logout, color: Colors.red),
       label: Text('Logout', style: TextStyle(color: Colors.red)),
