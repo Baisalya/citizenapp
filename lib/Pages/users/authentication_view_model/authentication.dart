@@ -10,7 +10,7 @@ class AuthViewModel extends ChangeNotifier {
   //Login User
   Future<bool> loginUser(String email, String password) async {
    // final Uri apiUrl = Uri.parse('$apiBaseUrl/api/auth/login');
-    final Uri apiUrl = Uri.parse('http://localhost:8800/api/auth/login');
+    final Uri apiUrl = Uri.parse('http://192.168.1.101:8800/api/auth/login');
     try {
       final response = await http.post(
         apiUrl,
