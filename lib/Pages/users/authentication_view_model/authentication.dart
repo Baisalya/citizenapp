@@ -23,7 +23,7 @@ class AuthViewModel extends ChangeNotifier {
     final userModel = UserModel(email: email, password: password, username: '', phoneNo: '', profilePic: '');
 
     final response = await http.post(
-      Uri.parse('http://localhost:8800/api/auth/login'), // Replace with your backend URL
+      Uri.parse('$apiBaseUrl/api/auth/login'), // backend URL
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
