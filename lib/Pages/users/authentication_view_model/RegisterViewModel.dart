@@ -14,7 +14,7 @@ class RegisterViewModel extends ChangeNotifier {
       notifyListeners();
 
       final apiUrl = 'http://localhost:8800/api/auth/register';
-      final userModel = User(username: username, email: email, password: password, phoneNo: '', profilePic: '');
+      final userModel = UserModel(username: username, email: email, password: password, phoneNo: '', profilePic: '');
 
       final response = await http.post(
         Uri.parse(apiUrl),

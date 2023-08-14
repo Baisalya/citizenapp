@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   PageController _pageController = PageController();
   // Method to build the email input field
-  Widget _buildEmailField() {
+  Widget _buildEmailField(TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // Method to build the password input field
-  Widget _buildPasswordField() {
+  Widget _buildPasswordField(TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -146,110 +146,23 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-  Future<void> _login() async {
-    final response = await http.post(
-      Uri.parse('http://localhost:8800/api/auth/login'), // Replace with your backend URL
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        'email': emailController.text,
-        'password': passwordController.text,
-      }),
-    );
 
-    if (response.statusCode == 200) {
-      // Successful login
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      final String token = responseData['token'];
-
-      // Save token or handle login success here
-
-      // Show a toast message
-      Fluttertoast.showToast(
-        msg: 'Login success!',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey[600],
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-
-      // Navigate to the home screen
-      Get.toNamed('/home');
-    } else {
-      // Failed login
-      final Map<String, dynamic> errorData = json.decode(response.body);
-      final String errorMessage = errorData['message'];
-
-      // Show an error message using a dialog or a toast
-      Fluttertoast.showToast(
-        msg: errorMessage,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 3,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-
-      // Handle other error scenarios if needed
-    }
-  }
 
 
   // Method to build the login button
-  Widget _buildLoginButton(BuildContext context) {
+  Widget _buildLoginButton(BuildContext context,AuthViewModel viewModel) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        /*onPressed: () {
-          final email = emailController.text;
-          final password = passwordController.text;
 
-          // Check if email and password are not empty
-          if (email.isEmpty || password.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Email and password cannot be empty'),
-              ),
-            );
-            return; // Return early if there's a validation error
-          }
+        onPressed: () {
+          viewModel.login(
+            emailController.text,
+            passwordController.text,
+          );
+        },
 
-          final authViewModel =
-          Provider.of<AuthViewModel>(context, listen: false);
-          authViewModel.loginUser(email, password).then((success) {
-            if (success) {
-              Fluttertoast.showToast(
-                msg: 'Login success!',
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.grey[600],
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
-              // Login successful, navigate to the next screen
-            } else {
-              // Show error message
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Login Failed! Please Try Again Later'),
-                ),
-              );
-            }
-          }).catchError((error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(error.toString()),
-              ),
-            );
-          });
-        },*/
-        onPressed: _login,
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
           elevation: 5.0,
@@ -274,13 +187,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<AuthViewModel>(context);
     return Scaffold(
       body: Stack(
         children: <Widget>[
           Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -303,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   "Welcome Back",
                   style: TextStyle(
                     color: Colors.white,
@@ -312,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
+                const Text(
                   "Sign in to continue",
                   style: TextStyle(
                     color: Colors.white70,
@@ -320,9 +234,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                _buildEmailField(),
+                _buildEmailField(emailController),
                 SizedBox(height: 20),
-                _buildPasswordField(),
+                _buildPasswordField(passwordController),
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -337,9 +251,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                _buildLoginButton(context),
+                _buildLoginButton(context,viewModel),
                 SizedBox(height: 30),
-                Text(
+                const Text(
                   'Or Sign in with',
                   style: TextStyle(
                     color: Colors.white70,
@@ -372,7 +286,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Get.offNamed('/home');
                   },
                   child: RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       children: [
                         TextSpan(
                           text: "Don't have an account? ",

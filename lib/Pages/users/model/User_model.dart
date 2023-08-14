@@ -1,12 +1,12 @@
 
-class User {
+class UserModel {
   final String username;
   final String email;
   final String phoneNo;
   final String profilePic;
   final String password;
 
-  User({
+  UserModel({
     required this.username,
     required this.email,
     required this.phoneNo,
