@@ -18,6 +18,8 @@ class UserModel {
       'username': username,
       'email': email,
       'password': password,
+      'phoneNo': phoneNo,
+      'profilePic': profilePic,
     };
   }
 }

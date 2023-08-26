@@ -147,8 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
-
   // Method to build the login button
   Widget _buildLoginButton(BuildContext context,AuthViewModel viewModel) {
     return Container(
@@ -240,7 +238,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('/signup');
+                    },
                     child: Text(
                       'Forgot Password?',
                       style: TextStyle(
