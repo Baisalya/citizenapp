@@ -111,6 +111,7 @@ class SettingsTab extends StatelessWidget {
         }),
         _buildListTile('Support ', Icons.help, () {
           // Implement support functionality here
+          Get.toNamed('/help&support');
         }),
         SizedBox(height: 16.0),
         Divider(thickness: 1.0, height: 1.0, color: Colors.grey),

@@ -70,30 +70,5 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-  //Register user
-  /*Future<bool> registerUser(User user) async {
-    final response = await http.post(
-      Uri.parse('http://localhost:8800/api/auth/register'),
-      body: {
-        'username': user.username,
-        'email': user.email,
-       *//* 'phoneNo': user.phoneNo,
-        'profilepic': user.profilePic,*//*
-        'password': user.password,
-      },
-    );
 
-    if (response.statusCode == 200) {
-      // User registered successfully
-      return true;
-    }else if (response.statusCode == 409) {
-      // Username or email already exists
-      final responseBody = json.decode(response.body);
-      final errorMessage = responseBody['message'];
-      throw Exception(errorMessage); // Throw an exception to be caught and handled
-    } else {
-      // Handle registration error
-      return false;
-    }
-  }*/
 }

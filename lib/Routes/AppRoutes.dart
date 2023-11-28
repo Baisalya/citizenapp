@@ -7,6 +7,7 @@ import 'package:citizenapp/Pages/Home/SettingTab/EditProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Pages/Home/SettingTab/help center/view/index.dart';
 import '../Pages/users/LoginScreen.dart';
 import '../Pages/users/SignUpScreen.dart';
 
@@ -44,6 +45,8 @@ class AppRoutes {
     GetPage(name: '/editProfile',
         page: ()=>EditProfileScreen()),
     GetPage(name:'/changePassword' ,
-        page: ()=>ChangePasswordScreen())
+        page: ()=>ChangePasswordScreen()),
+    GetPage(name:'/help&support' ,
+        page: ()=>SupportView()),
   ];
 }
