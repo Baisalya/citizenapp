@@ -105,12 +105,16 @@ class SettingsTab extends StatelessWidget {
       children: [
         _buildListTile('Terms and Conditions ', Icons.description, () {
           // Implement terms and conditions functionality here
+          Get.toNamed('/termscnd');
         }),
         _buildListTile('Privacy Policy ', Icons.privacy_tip, () {
           // Implement privacy policy functionality here
+          Get.toNamed('/pp');
         }),
         _buildListTile('Support ', Icons.help, () {
           // Implement support functionality here
+          //Get.toNamed('/privacy policy');
+
           Get.toNamed('/help&support');
         }),
         SizedBox(height: 16.0),

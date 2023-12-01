@@ -1,5 +1,7 @@
 import 'package:citizenapp/Pages/Home/HomeScreen.dart';
 import 'package:citizenapp/Pages/Home/SettingTab/ChangePasswordScreen.dart';
+import 'package:citizenapp/Pages/Home/SettingTab/Privacypolicy.dart';
+import 'package:citizenapp/Pages/Home/SettingTab/terms&condition.dart';
 import 'package:citizenapp/Pages/Home/Tab/SettingTab.dart';
 import 'package:citizenapp/Pages/Onboarding/OnboardingScreen.dart';
 import 'package:citizenapp/Pages/Onboarding/Splashscreen.dart';
@@ -44,9 +46,14 @@ class AppRoutes {
    //setting contents
     GetPage(name: '/editProfile',
         page: ()=>EditProfileScreen()),
+    GetPage(name: '/termscnd',
+        page:()=> TermsAndConditionsScreen()),
     GetPage(name:'/changePassword' ,
         page: ()=>ChangePasswordScreen()),
     GetPage(name:'/help&support' ,
         page: ()=>SupportView()),
+    GetPage(
+        name:'/pp' ,
+        page: ()=> PrivacyPolicyScreen()),
   ];
 }

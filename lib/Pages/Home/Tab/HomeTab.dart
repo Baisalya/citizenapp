@@ -182,9 +182,26 @@ class HomeTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Emergency Contacts',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Emergency Contacts',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                icon: Icon(Icons.contact_emergency),
+                onPressed: () {
+                  // Add your logic to handle the "Add Contact" button click
+                },
+                color: Colors.black87, // Icon color
+                iconSize: 30.0, // Icon size
+                padding: EdgeInsets.all(10.0), // Padding around the icon
+                splashRadius: 20.0, // Splash radius when tapped
+                tooltip: 'Add Contact', // Tooltip
+                splashColor: Colors.green, // Splash color when tapped
+              ),
+            ],
           ),
           SizedBox(height: 10.0),
           ListTile(
@@ -201,6 +218,7 @@ class HomeTab extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildMessageSentUI() {
     return Container(
