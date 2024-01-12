@@ -61,7 +61,7 @@ class HomeTab extends StatelessWidget {
               radius: 1.5,
               colors: [Colors.redAccent, Colors.deepOrange],
             ),
-            borderRadius: BorderRadius.circular(10.0),
+            //borderRadius: BorderRadius.circular(0.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
